@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    background: url("background.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+#topImage {
+    width: 70%;
+    max-width: 250px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #d63384;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, left 0.2s ease, top 0.2s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background-color: #6c757d;
+    color: white;
+    position: relative;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Mobile adjustments */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+    }
+}
