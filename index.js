@@ -6,22 +6,25 @@ const topImage = document.getElementById("topImage");
 let noClickCount = 0;
 let yesScale = 1;
 let dodgeMode = false;
+let dodgeInterval = null;
 
 const questions = [
-    "Are you sure? 🥺",
+    "Are you sure you dont want to be pooka's valentine :(",
     "Really sure? 😭",
-    "Think again! 💔",
-    "Last chance before I panic 😳"
+    "Think again otherwise I will be shad 💔",
+    "Last chance before I go all andar bandar shundar 😳"
 ];
 
 const images = [
-    "images/image2.gif",
-    "images/image3.gif",
-    "images/image4.gif",
-    "images/image5.gif"
+    "sad_1.gif",
+    "sad_3.gif",
+    "sad_4.gif",
+    "sad_2.gif"
 ];
 
 noBtn.addEventListener("click", () => {
+
+    if (dodgeMode) return; // Prevent clicking once dodge starts
 
     if (noClickCount < questions.length) {
         question.textContent = questions[noClickCount];
@@ -29,38 +32,63 @@ noBtn.addEventListener("click", () => {
     }
 
     noClickCount++;
-
-    // Grow YES button
     yesScale += 0.3;
     yesBtn.style.transform = `scale(${yesScale})`;
 
-    // Activate dodge mode after 4 clicks
     if (noClickCount >= 4) {
-        dodgeMode = true;
-        noBtn.style.position = "fixed";
+        activateDodgeMode();
     }
 });
 
+function activateDodgeMode() {
+    dodgeMode = true;
+
+    noBtn.style.position = "fixed";
+    noBtn.style.zIndex = "1000";
+    noBtn.style.pointerEvents = "none"; // 🚫 Cannot click anymore
+
+    moveNoButton();
+
+    // 🔥 Auto move every 700ms
+    dodgeInterval = setInterval(moveNoButton, 700);
+}
+
 function moveNoButton() {
-    if (!dodgeMode) return;
+    const buttonWidth = noBtn.offsetWidth;
+    const buttonHeight = noBtn.offsetHeight;
 
-    const maxX = window.innerWidth - noBtn.offsetWidth;
-    const maxY = window.innerHeight - noBtn.offsetHeight;
+    const maxX = window.innerWidth - buttonWidth;
+    const maxY = window.innerHeight - buttonHeight;
 
-    const randomX = Math.random() * maxX;
-    const randomY = Math.random() * maxY;
+    const yesRect = yesBtn.getBoundingClientRect();
+
+    let randomX, randomY;
+    let safe = false;
+
+    while (!safe) {
+        randomX = Math.random() * maxX;
+        randomY = Math.random() * maxY;
+
+        const padding = 100;
+
+        const overlapsYes =
+            randomX < yesRect.right + padding &&
+            randomX + buttonWidth > yesRect.left - padding &&
+            randomY < yesRect.bottom + padding &&
+            randomY + buttonHeight > yesRect.top - padding;
+
+        if (!overlapsYes) {
+            safe = true;
+        }
+    }
 
     noBtn.style.left = randomX + "px";
     noBtn.style.top = randomY + "px";
 }
 
-// Desktop hover dodge
-noBtn.addEventListener("mouseover", moveNoButton);
-
-// Mobile touch dodge
-noBtn.addEventListener("touchstart", moveNoButton);
-
 yesBtn.addEventListener("click", () => {
+    if (dodgeInterval) clearInterval(dodgeInterval);
+
     document.body.innerHTML = `
         <div style="
             display:flex;
@@ -70,11 +98,35 @@ yesBtn.addEventListener("click", () => {
             height:100vh;
             background:pink;
             text-align:center;
-            padding:20px;">
+            padding:20px;
+        ">
             
             <h1 style="font-size:3rem;">YAYYYYY 💖💖💖</h1>
-            <p style="font-size:1.5rem;">You just made me the happiest person alive 🥰</p>
-            <img src="happy.jpg" style="width:250px; margin-top:20px;">
+            <p style="font-size:1.5rem;">
+                Me happy happy happy 
+            </p>
+
+            <img src="happy.gif" 
+                 style="width:250px; margin-top:20px; border-radius:15px;">
+
+            <button 
+                onclick="window.location.href='captcha.html'" 
+                style="
+                    margin-top:30px;
+                    padding:14px 25px;
+                    font-size:1rem;
+                    border:none;
+                    border-radius:25px;
+                    background:#ff4d6d;
+                    color:white;
+                    cursor:pointer;
+                    transition:0.3s;
+                "
+                onmouseover="this.style.transform='scale(1.05)'"
+                onmouseout="this.style.transform='scale(1)'"
+            >
+                Now let's see if you remember your valentine or are you just a robot
+            </button>
         </div>
     `;
 });

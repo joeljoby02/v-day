@@ -40,19 +40,21 @@ h1 {
 
 .buttons {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;   /* Stack vertically */
+    align-items: center;
+    gap: 20px;
     position: relative;
+    margin-top: 20px;
 }
 
 button {
-    padding: 12px 20px;
+    width: 200px;           /* Fixed width prevents layout shifts */
+    padding: 14px 20px;
     font-size: 1rem;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.2s ease, left 0.2s ease, top 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 #yesBtn {

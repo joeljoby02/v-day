@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine Verification 💘</title>
+  <link rel="stylesheet" href="captcha.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <div class="captcha-wrapper">
+    
+    <h1>Prove You Are Really My Valentine 💖</h1>
+    <p>Choose your partner</p>
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="fakeCheck">
+      <label for="fakeCheck">I am not a robot… I am your pooka</label>
+    </div>
+
+    <div id="captchaBox" class="captcha-box hidden">
+      <p>Select ALL images of your partner 🥰</p>
+
+      <div class="grid">
+        <!-- Replace src with your images -->
+        <img src="joel_boo.jpeg" class="captcha-img">
+        <img src="joel_cafe.jpeg" class="captcha-img">
+        <img src="joel_italy.jpeg" class="captcha-img">
+        <img src="joel_office.jpeg" class="captcha-img">
+        <img src="joel_petite.jpeg" class="captcha-img">
+        <img src="joel_pumpkin_carve.jpeg" class="captcha-img">
+        <img src="joel_pumpkin.jpeg" class="captcha-img">
+        <img src="joel_shawl.jpeg" class="captcha-img">
+        <img src="joel_water.jpeg" class="captcha-img">
+      </div>
+
+      <button id="submitBtn">Submit</button>
+    </div>
+
+  </div>
+
+  <script src="captcha.js"></script>
+</body>
+</html>
